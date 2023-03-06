@@ -1,38 +1,36 @@
 import React from "react";
 import { Text, TextInput, View, StyleSheet } from "react-native";
-import Dropdown from "react-native-input-select";
+import SelectDropdown from "react-native-select-dropdown";
 
 export default function Input({
   placeholder = "",
   value = "",
-  onChangeText = () => {},
+  onChange = () => {},
   label = "",
   keyType = "default",
   type = "text",
 }) {
-  const [country, setCountry] = React.useState();
+  const countries = ["Egypt", "Canada", "Australia", "Ireland"];
+
   if (type === "select") {
     return (
       <View>
-        <Dropdown
-          label="Country"
-          placeholder="Select an option..."
-          options={[
-            { name: "Albania", code: "AL" },
-            { name: "Åland Islands", code: "AX" },
-            { name: "Algeria", code: "DZ" },
-            { name: "American Samoa", code: "AS" },
-            { name: "Andorra", code: "AD" },
-            { name: "Angola", code: "AO" },
-            { name: "Anguilla", code: "AI" },
-            { name: "Antarctica", code: "AQ" },
-            { name: "Antigua and Barbuda", code: "AG" },
-          ]}
-          optionLabel={"name"}
-          optionValue={"code"}
-          selectedValue={country}
-          onValueChange={(value) => value && setCountry(value)}
-          primaryColor={"green"}
+        <SelectDropdown
+          data={countries}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index);
+            onChange(selectedItem);
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem;
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item;
+          }}
         />
       </View>
     );
@@ -44,7 +42,7 @@ export default function Input({
           style={styles.input}
           placeholder={placeholder}
           value={value.toString()}
-          onChangeText={onChangeText}
+          onChangeText={onChange}
           keyboardType={keyType}
         />
       </View>

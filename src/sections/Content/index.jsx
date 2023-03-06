@@ -25,14 +25,14 @@ export default function Content() {
           label="Amount"
           placeholder="Set amount"
           keyType="numeric"
-          onChangeText={setAmountInput}
+          onChange={setAmountInput}
           value={amountInput}
         />
         <View style={styles.fromToContent}>
           <Input
             label="From"
             placeholder="Set from"
-            onChangeText={setFromCurrency}
+            onChange={setFromCurrency}
             value={fromCurrency}
             type="select"
           />
@@ -40,7 +40,7 @@ export default function Content() {
           <Input
             label="To"
             placeholder="Set to"
-            onChangeText={setToCurrency}
+            onChange={setToCurrency}
             value={toCurrency}
             type="select"
           />
