@@ -9,21 +9,31 @@ import React, {
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [amountCurrency, setAmountCurrency] = useState("USD");
-  const [amountInput, setAmountInput] = useState("");
+  const [amountInput, setAmountInput] = useState(0);
+  const [amountResult, setAmountResult] = useState(0);
+  const [amountResultInverted, setAmountResultInverted] = useState(0);
 
-  const [fromInput, setFromInput] = useState("");
-  const [toInput, setToInput] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("BRL");
+
+  const [currencies, setCurrencies] = useState([]);
+
+  const swapCurrencies = () => {
+    alert("swapCurrencies");
+  };
 
   const value = {
     amountInput,
     setAmountInput,
-    amountCurrency,
-    setAmountCurrency,
-    fromInput,
-    setFromInput,
-    toInput,
-    setToInput,
+    amountResultInverted,
+    setAmountResultInverted,
+    fromCurrency,
+    setFromCurrency,
+    toCurrency,
+    setToCurrency,
+    amountResult,
+    setAmountResult,
+    swapCurrencies,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
