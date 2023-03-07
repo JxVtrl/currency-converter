@@ -5,6 +5,7 @@ import React, {
   useState,
   useRef,
 } from "react";
+import { getCrypto } from "../services/getCrypto";
 
 const AppContext = createContext();
 
@@ -13,10 +14,16 @@ export function AppProvider({ children }) {
   const [amountResult, setAmountResult] = useState(0);
   const [amountResultInverted, setAmountResultInverted] = useState(0);
 
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("BRL");
+  const [fromCurrency, setFromCurrency] = useState({});
+  const [toCurrency, setToCurrency] = useState({});
 
   const [currencies, setCurrencies] = useState([]);
+
+  useEffect(async () => {
+    const response = await getCrypto();
+    const currencies = response.data;
+    setCurrencies(currencies);
+  }, []);
 
   const swapCurrencies = () => {
     alert("swapCurrencies");
@@ -34,6 +41,7 @@ export function AppProvider({ children }) {
     amountResult,
     setAmountResult,
     swapCurrencies,
+    currencies,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

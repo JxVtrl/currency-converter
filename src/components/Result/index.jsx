@@ -13,23 +13,29 @@ export default function Result() {
   } = useApp();
   return (
     <View>
-      <View>
-        <Text>
-          {amountInput} {fromCurrency} =
-        </Text>
-      </View>
+      {amountInput > 0 && fromCurrency && (
+        <View>
+          <Text>
+            {amountInput} {fromCurrency.symbol} =
+          </Text>
+        </View>
+      )}
 
-      <View>
-        <Text>
-          {amountResult} {toCurrency}
-        </Text>
-      </View>
+      {amountResult > 0 && toCurrency && (
+        <View>
+          <Text>
+            {amountResult} {toCurrency.symbol}
+          </Text>
+        </View>
+      )}
 
-      <View>
-        <Text>
-          1 {toCurrency} = {amountResultInverted} {fromCurrency}
-        </Text>
-      </View>
+      {amountResultInverted > 0 && toCurrency && fromCurrency && (
+        <View>
+          <Text>
+            1 {toCurrency.symbol} = {amountResultInverted} {fromCurrency.symbol}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
