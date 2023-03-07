@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 20,
     marginTop: 20,
+    justifyContent: "space-between",
     overflow: "hidden",
     padding: 20,
     shadowColor: "#000",

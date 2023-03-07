@@ -1,53 +1,36 @@
+import { StyleSheet, Button, View } from "react-native";
 import React from "react";
 import Title from "../../components/Title";
 import Modal from "../../components/Modal";
 import Input from "../../components/Input";
 import Result from "../../components/Result";
-import SwapButton from "../../components/SwapButton";
+
+import FromTo from "../FromTo";
 import { useApp } from "../../context/AppContext";
-import { StyleSheet, View } from "react-native";
 
 export default function Content() {
-  const {
-    amountInput,
-    setAmountInput,
-    fromCurrency,
-    setFromCurrency,
-    setToCurrency,
-    toCurrency,
-  } = useApp();
+  const { amountInput, setAmountInput, convertCurrency } = useApp();
 
   return (
     <>
       <Title />
       <Modal>
-        <Input
-          label="Amount"
-          placeholder="Set amount"
-          keyType="numeric"
-          onChange={setAmountInput}
-          value={amountInput}
-        />
-        <View style={styles.fromToContent}>
-          <Input
-            label="From"
-            placeholder="Set from"
-            onChange={setFromCurrency}
-            value={fromCurrency}
-            type="select"
-          />
-          <SwapButton />
-          <Input
-            label="To"
-            placeholder="Set to"
-            onChange={setToCurrency}
-            value={toCurrency}
-            type="select"
-          />
-        </View>
         <View>
+          <Input
+            label="Amount"
+            placeholder="Set amount"
+            keyType="numeric"
+            onChange={setAmountInput}
+            value={amountInput}
+          />
+          <FromTo />
           <Result />
         </View>
+        <Button
+          title="Convert"
+          onPress={convertCurrency}
+          style={styles.convertBtn}
+        />
       </Modal>
     </>
   );
@@ -58,5 +41,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     alignItems: "center",
+  },
+  convertBtn: {
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: "flex-end",
   },
 });

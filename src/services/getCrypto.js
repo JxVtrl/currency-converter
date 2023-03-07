@@ -1,6 +1,6 @@
 import { apiList } from "../data/apiList";
 
-export const getCrypto = async () => {
+export const getCryptoApi = async () => {
   const cryptoAPI = apiList[1];
   const subPath = cryptoAPI.subpath[0];
 

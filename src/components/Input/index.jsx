@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, TextInput, View, StyleSheet } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
-import { useApp } from "../../context/AppContext";
 
 export default function Input({
   placeholder = "",
@@ -9,50 +7,19 @@ export default function Input({
   onChange = () => {},
   label = "",
   keyType = "default",
-  type = "text",
 }) {
-  const { currencies } = useApp();
-
-  useEffect(() => {
-    console.log(JSON.stringify(currencies, null, 2));
-  }, [currencies]);
-
-  if (type === "select") {
-    return (
-      <SelectDropdown
-        data={currencies}
-        onSelect={(selectedItem, index) => {
-          onChange(selectedItem);
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          // text represented after item is selected
-          // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem.name;
-        }}
-        search={true}
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item.symbol;
-        }}
+  return (
+    <View>
+      <Text style={styles.label}>{label}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        value={value.toString()}
+        onChangeText={onChange}
+        keyboardType={keyType}
       />
-    );
-  } else if (type === "text") {
-    return (
-      <View>
-        <Text style={styles.label}>{label}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder={placeholder}
-          value={value.toString()}
-          onChangeText={onChange}
-          keyboardType={keyType}
-        />
-      </View>
-    );
-  } else {
-    return <></>;
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
